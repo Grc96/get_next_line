@@ -6,18 +6,19 @@
 /*   By: gdel-cas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:59:59 by gdel-cas          #+#    #+#             */
-/*   Updated: 2024/01/11 18:23:00 by gdel-cas         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:12:07 by gdel-cas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-#endif
+
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 10
+# define BUFFER_SIZE 15
 
 #include<unistd.h>
 #include <stdlib.h>
+#endif
 
 // get_next_line
 char	*get_next_line(int fd);
