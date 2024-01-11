@@ -6,11 +6,11 @@
 /*   By: gdel-cas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 17:22:46 by gdel-cas          #+#    #+#             */
-/*   Updated: 2023/12/18 18:57:51 by gdel-cas         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:22:54 by gdel-cas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <get_next_line.h>
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -32,7 +32,7 @@ void	ft_bzero(void *s, size_t n)
 }
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*ptr
+	void	*ptr;
 		
 	ptr = (void *)malloc(count * size);
 	if (!ptr)
@@ -50,7 +50,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	new = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
 	if (!new)
 		return (NULL);
-	if (!s1  || !s)
+	if (!s1  || !s2)
 		return (0);
 	i = 0;
 	while (s1[i] != 0)
