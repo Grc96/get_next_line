@@ -6,13 +6,19 @@
 /*   By: gdel-cas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:31:17 by gdel-cas          #+#    #+#             */
-/*   Updated: 2024/01/11 19:12:12 by gdel-cas         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:40:53 by gdel-cas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include  "get_next_line.h"
 #include<fcntl.h>
+
+/* funcion que coja la linea leida y a guarde enun buffer y se guarda en la variable estatica*/
+char	*ft_save_str(int fd, char *save_str)
+{
+
+}
 
 char	*get_next_line(int fd)
 {
