@@ -6,7 +6,7 @@
 /*   By: gdel-cas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 17:22:46 by gdel-cas          #+#    #+#             */
-/*   Updated: 2024/01/11 18:27:25 by gdel-cas         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:24:06 by gdel-cas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,31 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	}
 	return (ft_strlen(src));
 }
+char    *ft_strchr(const char *s, int c)
+{
+	int i;
+   	i = 0;
+   	while (s[i])
+	{
+	   	if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (s[i] == '\0' && (char)c == '\0')
+		return ((char *)&s[i]);
+			return (NULL);
+}
+ 
+char	*ft_now_line(char *str)
+{
+	char	*aux;
+	int	i;
 
+	i = 0;
+	if(!str)
+		return(NULL);
+	while(str[i] != '\n' && str[i] )
 
-
+}
 
 
