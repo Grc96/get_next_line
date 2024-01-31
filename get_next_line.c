@@ -6,7 +6,7 @@
 /*   By: gdel-cas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:31:17 by gdel-cas          #+#    #+#             */
-/*   Updated: 2024/01/31 12:31:22 by gdel-cas         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:03:59 by gdel-cas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*ft_new_line(char *str)
 		free(str);
 		return (NULL);
 	}
-	aux2 = (char *)ft_calloc(ft_strlen(aux2) + 1, sizeof(char));
+	aux2 = (char *)ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	if (!aux2)
 		return (NULL);
 	y = 0;
@@ -123,7 +123,7 @@ int	main(void)
 	fd = open("text.txt",O_RDONLY);
 	next_line = get_next_line(fd);
 	count++;
-	printf("%02d: %s\n", count, next_line);
+	printf("%d: %s\n", count, next_line);
 	free(next_line);
 	close(fd);
 	return(0);
