@@ -6,7 +6,7 @@
 /*   By: gdel-cas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:59:59 by gdel-cas          #+#    #+#             */
-/*   Updated: 2024/01/30 15:24:01 by gdel-cas         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:37:15 by gdel-cas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 #include<unistd.h>
 #include <stdlib.h>
+#include <stddef.h>
+
 #endif
 
 // get_next_line

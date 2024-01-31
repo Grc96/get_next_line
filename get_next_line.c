@@ -1,4 +1,4 @@
-r* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
@@ -6,51 +6,111 @@ r* ************************************************************************** */
 /*   By: gdel-cas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:31:17 by gdel-cas          #+#    #+#             */
-/*   Updated: 2024/01/30 15:23:58 by gdel-cas         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:31:22 by gdel-cas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include  "get_next_line.h"
 #include<fcntl.h>
 
-/* funcion que coja la linea leida y a guarde enun buffer y se guarda en la variable estatica*/
-char	*ft_save_str(int fd, char *save_str)
+//funcion para sacar la primera linea hasta el salto de linea
+char    *ft_get_line(char *str)
 {
-	char	*str;
-	char	*aux;
-	int	i;
+        char    *aux;
+        int     i;
 
-	str = ft_calloc((BUFFER_SIZE + 1), sizeof (char *));
-	str = aux;
-	i = 0;
-	while (aux != '\0' && !ft_strchr(str, '\n'))
+        i = 0;
+        if (!str)
+                return (NULL);
+        while (str[i] != '\n' && str[i] )
+                i++;
+        aux = (char *)ft_calloc(i + 1, sizeof(char));    
+        if (!aux)
+                return (NULL);
+        i = 0;
+        while (str[i] != '\0' && str[i] != '\n')
 	{
-		i = read(fd, str, BUFFER_SIZE);
-		if (i == -1)
+		aux[i] = str[i];
+		i++;
+	}
+	if (str[i] == '\n')
+	{
+		aux[i] = str[i];
+		i++;
+	}
+	aux[i] = '\0';
+	return (aux);
+}
+
+//funcion para extraer la nueva linea despues del salto de linea
+
+char	*ft_new_line(char *str)
+{
+	char	*aux2;
+	int	i;
+	int	y;
+
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (!str[i])
+	{
+		free(str);
+		return (NULL);
+	}
+	aux2 = (char *)ft_calloc(ft_strlen(aux2) + 1, sizeof(char));
+	if (!aux2)
+		return (NULL);
+	y = 0;
+	while (str[i])
+	{
+		aux2[y] = str[i];
+		y++;
+		i++;
+	}
+	aux2[i] = '\0';
+	free(str);
+	return (aux2);
+}
+//leer los datos del fd y concatenarlos con str
+char	*ft_join_str(int fd, char *str)
+{
+	char	*aux;
+	int	r;
+
+	aux = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	r = 1;
+	while (r != 0 && !ft_strchr(str, '\n'))
+	{
+		r = read(fd, aux, BUFFER_SIZE);
+		if (r == -1)
 		{
-			free (str);
+			free (aux);
 			return (NULL);
 		}
 	
-		aux[i] = '\0';
-		save_str = ft_strjoin(save_str, str);
+		aux[r] = '\0';
+		str = ft_strjoin(str, aux);
 	}
-	free (str);
-	return (save_str);
+	free (aux);
+	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	int	bytes_read;
-	static char	*buf;
+	char	*line;
+	static char	*str;
 
-	/*buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));*/
-	buf = ft_save_str(fd, buf);
-	if(!buf)
+	if (fd < 0 && BUFFER_SIZE <= 0)
+		return (0);
+	str = ft_join_str(fd, str);
+	if (!str)
 		return(NULL);
-	bytes_read = read(fd, buf, BUFFER_SIZE);
-	return(buf);
+	line = ft_get_line(str);
+	str = ft_new_line(str);
+	return (line);
 }	
 
 int	main(void)
@@ -59,11 +119,12 @@ int	main(void)
 	int	count;
 	char	*next_line;
 	
-	count = 0;
+	count = 1;
 	fd = open("text.txt",O_RDONLY);
 	next_line = get_next_line(fd);
 	count++;
-	printf("%d: %s\n", count, next_line);
+	printf("%02d: %s\n", count, next_line);
+	free(next_line);
 	close(fd);
 	return(0);
 

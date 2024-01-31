@@ -6,11 +6,15 @@
 /*   By: gdel-cas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 17:22:46 by gdel-cas          #+#    #+#             */
-/*   Updated: 2024/01/30 15:24:06 by gdel-cas         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:40:17 by gdel-cas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdlib.h>
+#include<stddef.h>
+#include<stdio.h>
+#include<unistd.h>
 
 size_t	ft_strlen(const char *s)
 {
@@ -22,14 +26,16 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
-void	ft_bzero(void *s, size_t n)
+
+void    ft_bzero(void *s, size_t n)
 {
-	unsigned char   *ptr;
-	
-	ptr = (unsigned char *) s;
-	while (n-- > 0)
-		*(ptr++) = 0;
+        unsigned char   *ptr;
+
+        ptr = (unsigned char *) s;
+        while (n-- > 0)
+                *(ptr++) = 0;
 }
+
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*ptr;
@@ -63,22 +69,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		new[i++] = s2[j++];
 	return (new);
 }
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t  i;
-	
-	i = 0;
-	if (dstsize > 0)
-	{
-		while (src[i] && i < (dstsize - 1))
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = 0;
-	}
-	return (ft_strlen(src));
-}
 char    *ft_strchr(const char *s, int c)
 {
 	int i;
@@ -93,17 +83,3 @@ char    *ft_strchr(const char *s, int c)
 		return ((char *)&s[i]);
 			return (NULL);
 }
- 
-char	*ft_now_line(char *str)
-{
-	char	*aux;
-	int	i;
-
-	i = 0;
-	if(!str)
-		return(NULL);
-	while(str[i] != '\n' && str[i] )
-
-}
-
-
