@@ -6,14 +6,14 @@
 /*   By: gdel-cas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:31:17 by gdel-cas          #+#    #+#             */
-/*   Updated: 2024/01/31 13:03:59 by gdel-cas         ###   ########.fr       */
+/*   Updated: 2024/02/01 09:59:00 by gdel-cas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include  "get_next_line.h"
-#include<fcntl.h>
+#include "get_next_line.h"
+#include <fcntl.h>
 
 //funcion para sacar la primera linea hasta el salto de linea
 char    *ft_get_line(char *str)
