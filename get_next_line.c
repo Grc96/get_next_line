@@ -6,7 +6,7 @@
 /*   By: gdel-cas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:31:17 by gdel-cas          #+#    #+#             */
-/*   Updated: 2024/02/01 17:43:10 by gdel-cas         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:21:22 by gdel-cas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,24 @@
 char	*ft_get_line(char *str)
 {
 	char	*line;
+	int		len_str;
 	int		i;
 
-	i = 0;
-	if (!str)
+	if (str[0] == '\0')
 		return (NULL);
-	while (str[i] != '\n' && str[i])
-		i++;
-	if (str[i] != '\0')
-		i++;
-	line = malloc(sizeof(char) * (i + 1));
+	len_str = 0;
+	while (str[len_str] != '\n' && str[len_str])
+		len_str++;
+	if (str[len_str] != '\0')
+		len_str++;
+	line = malloc(sizeof(char) * (len_str + 1));
 	if (!line)
 		return (NULL);
 	i = 0;
-	while (str[i] != '\0' && str[i] != '\n')
+	ft_strlcpy(line, str, (len_str + 1));
+
+
+	/*while (str[i] != '\0' && i < (len_str - 1))
 	{
 		line[i] = str[i];
 		i++;
@@ -42,7 +46,7 @@ char	*ft_get_line(char *str)
 		line[i] = str[i];
 		i++;
 	}
-	line[i] = '\0';
+	line[i] = '\0';*/
 	return (line);
 }
 //funcion para extraer la nueva linea despues del salto de linea
@@ -50,37 +54,18 @@ char	*ft_get_line(char *str)
 char	*ft_new_line(char *str)
 {
 	char	*fin;
+	int		index;
 
-	
-	fin  = ft_strdup(ft_strchr(str, '\n'));
-	
-		
-		
-		
-		
-		
-	rest = malloc (sizeof(char) *  (i + 1));
-	if (!rest)
-		return (NULL);
-	i = 0;
-	while (str[i] && str[i] != '\n')
-		i++;
-	if (!str[i])
-	{
-		free(str);
-		return (NULL);
-	}
-	aux2 = malloc(sizeof(char) * ());
-	if (!aux2)
-		return (NULL);
-	y = 0;
-	while (str[i])
-	{
-		aux2[y++] = str[i++];
-	}
-	aux2[i] = '\0';
+	if(!ft_strchr(str, '\n') || str[0] == '\0')
+		return(free(str), str = NULL, NULL);
+	index = ft_strlen(str) - ft_strlen(ft_strchr(str, '\n'));
+	fin  = ft_strdup(&str[index + 1]);
 	free(str);
-	return (aux2);
+	
+	return(fin);	
+		
+		
+		
 }
 //leer los datos del fd y concatenarlos con str
 
@@ -97,12 +82,14 @@ char	*ft_read_str(int fd, char *str)
 			return (NULL);
 		*str = '\0';
 	}
+	*new = '\0';
 	r = 1;
 	while (r > 0 && !ft_strchr(str, '\n'))
 	{
 		r = read(fd, new, BUFFER_SIZE);
 		if (r == -1)
-			return (NULL);
+			return (free(str), str = NULL, NULL);
+		new[r] = '\0';
 		aux = str;
 		str = ft_strjoin(str, new);
 		free(aux);
@@ -120,19 +107,22 @@ char	*get_next_line(int fd)
 	str = ft_read_str(fd, str);
 	if (!str)
 		return (NULL);
+	//printf("total_str=%s\n", str);
 	line = ft_get_line(str);
+	//printf("line=%s\n", line);
 	if (!line)
-		return (NULL);
+		return (free(str), str = NULL, NULL);
 	str = ft_new_line(str);
+	//printf("str=%s\n", str);
 	return (line);
 }
 
-/*int	main(void)
+int	main(void)
 {
 	int		fd;
 	char	*next_line;
 
-	fd = open("text.txt", O_RDONLY);
+	fd = open("text.txt",  O_RDONLY);
 	next_line = "";
 	while(next_line)
 	{
@@ -143,4 +133,4 @@ char	*get_next_line(int fd)
 	close(fd);
 	//system("leaks -q a.out");
 	return(0);
-}*/ft_new_line(str)
+}

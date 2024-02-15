@@ -6,7 +6,7 @@
 /*   By: gdel-cas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 17:22:46 by gdel-cas          #+#    #+#             */
-/*   Updated: 2024/02/01 17:43:17 by gdel-cas         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:54:09 by gdel-cas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	j;
 	char	*new;
 
+	if(!s1 || !s2)
+		return(NULL);
 	new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!new)
 		return (NULL);
-	if (!s1 || !s2)
-		return (0);
 	i = 0;
 	while (s1[i] != 0)
 	{
